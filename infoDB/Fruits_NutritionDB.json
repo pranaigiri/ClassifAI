@@ -1,0 +1,140 @@
+[ 
+    {
+        "name": "Apple",
+        "info": "An apple is an edible fruit produced by an apple tree. Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.",
+        "uses":[
+            {
+                "use": "Helps Prevent Cancer."
+            },
+            {
+                "use": "Helps Fight Asthma."
+            },
+            {
+                "use": "Linked to a Lower Risk of Diabetes."
+            }
+        ],
+        "location":"Central Asia,Jammu & Kashmir, Himachal Pradesh, hills of Uttar Pradesh and Uttaranchal."
+    },
+    {
+        "name": "Banana",
+        "info": "A banana is an elongated, edible fruit botanically a berry produced by several kinds of large herbaceous flowering plants in the genus Musa. In some countries, bananas used for cooking may be called 'plantains', distinguishing them from dessert bananas.",
+        "uses":[
+
+            {
+                "use": "Improve Blood Sugar Levels"
+            },
+            {
+                "use": "Support Digestive Health"
+            },
+            {
+                "use": "Aid Weight Loss"
+            },
+            {
+                "use": "Support Heart Health"
+            },
+            {
+                "use": "Antioxidants"
+            },
+            {
+                "use": "Rich in nutrients"
+            }
+        ],
+        "location": "Today they are grown in tropical regions across the globe."
+    },
+    {
+        "name": "Peach",
+        "info": "The peach is a deciduous tree first domesticated and cultivated in Zhejiang province of Eastern China. It bears edible juicy fruits with various characteristics, most called peaches and others, nectarines.",
+        "uses":[
+            {
+                "use": "Decreased inflammation."
+            },
+            {
+                "use": "Improved digestion."
+            },
+            {
+                "use": "Help in Smoother skin."
+            }
+        ],
+        "location": "Jammu & Kashmir, Meghalaya, Uttarakhand, Sikkim, etc."
+    },
+    {
+        "name": "Orange",
+        "info": "An orange is a fruit of various citrus species in the family Rutaceae; it primarily refers to Citrus sinensis, which is also called sweet orange, to distinguish it from the related Citrus aurantium, referred to as bitter orange.",
+        "uses":[
+            {
+                "use": "Protects your cells from damage."
+            },
+            {
+                "use": "Makes it easier to absorb iron to fight anemia."
+            },
+            {
+                "use": "Boosts your immune system, your body's defense against germs."
+            }
+        ],
+        "location": "Andhra Pradesh, Maharashtra, Karnataka, Punjab, Haryana and Rajasthan."
+    },
+    {
+        "name": "Guava",
+        "info": "Guava is a common tropical fruit cultivated in many tropical and subtropical regions. The common guava Psidium guajava is a small tree in the myrtle family, native to Mexico, Central America, the Caribbean and northern South America.",
+        "uses":[
+            {
+                "use": "Help Lower Blood Sugar Levels."
+            },
+            {
+                "use": "Help Relieve Painful Symptoms of Menstruation."
+            },
+            {
+                "use": "Benefit Your Digestive System."
+            }
+        ],
+        "location": "Punjab, Haryana,Allahabad and Lucknow in Uttar Pradesh."
+    },
+    {
+        "name": "Strawberry",
+        "info": "Strawberry is a common tropical fruit cultivated in many tropical and subtropical regions. The common guava Psidium guajava is a small tree in the myrtle family, native to Mexico, Central America, the Caribbean and northern South America.",
+        "uses":[
+            {
+                "use": "Help Lower Blood Sugar Levels."
+            },
+            {
+                "use": "Help Relieve Painful Symptoms of Menstruation."
+            },
+            {
+                "use": "Benefit Your Digestive System."
+            }
+        ],
+        "location": "Punjab, Haryana,Allahabad and Lucknow in Uttar Pradesh."
+    },
+    {
+        "name": "Mango",
+        "info": "Mango is a common tropical fruit cultivated in many tropical and subtropical regions. The common guava Psidium guajava is a small tree in the myrtle family, native to Mexico, Central America, the Caribbean and northern South America.",
+        "uses":[
+            {
+                "use": "Help Lower Blood Sugar Levels."
+            },
+            {
+                "use": "Help Relieve Painful Symptoms of Menstruation."
+            },
+            {
+                "use": "Benefit Your Digestive System."
+            }
+        ],
+        "location": "Punjab, Haryana,Allahabad and Lucknow in Uttar Pradesh."
+    },
+    {
+        "name": "Dragon Fruit",
+        "info": "Dragon Fruit is a common tropical fruit cultivated in many tropical and subtropical regions. The common guava Psidium guajava is a small tree in the myrtle family, native to Mexico, Central America, the Caribbean and northern South America.",
+        "uses":[
+            {
+                "use": "Help Lower Blood Sugar Levels."
+            },
+            {
+                "use": "Help Relieve Painful Symptoms of Menstruation."
+            },
+            {
+                "use": "Benefit Your Digestive System."
+            }
+        ],
+        "location": "Punjab, Haryana,Allahabad and Lucknow in Uttar Pradesh."
+    }
+]

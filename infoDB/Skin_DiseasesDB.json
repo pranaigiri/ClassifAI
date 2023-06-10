@@ -1,0 +1,63 @@
+[ 
+    {
+        "name": "Aloevera",
+        "info": "Aloe vera is a succulent plant species of the genus Aloe. Having some 500 species, Aloe is widely distributed, and is considered an invasive species in many world regions. ",
+        "uses":[
+            {
+                "use1": "Soothes Burns"
+            },
+            {
+                "use2": "Heals Wounds"
+            },
+            {
+                "use3": "Eases Intestinal Problems"
+            },
+            {
+                "use4": "Reduces Arthritic Swelling"
+            },
+            {
+                "use5": "Heals Psoriasis Lesions"
+            },
+            {
+                "use6": "Gum Infections"
+            }
+        ],
+        "location":"There is large-scale agricultural production of Aloe vera in Australia, Cuba, the Dominican Republic, China, Mexico, India, Jamaica, Spain, where it grows even well inland, Kenya, Tanzania, and South Africa, along with the USA to supply the cosmetics industry."
+    },
+    {
+        "name": "Banmara",
+        "info": "This is the info for the aloevera Plant",
+        "uses":{
+            "use1": "Uses number 1",
+            "use2": "Uses number 2",
+            "use3": "Uses number 3"
+        }
+    },
+    {
+        "name": "Brahmi",
+        "info": "This is the info for the aloevera Plant",
+        "uses":{
+            "use1": "Uses number 1",
+            "use2": "Uses number 2",
+            "use3": "Uses number 3"
+        }
+    },
+    {
+        "name": "Tulsi",
+        "info": "This is the info for the aloevera Plant",
+        "uses":{
+            "use1": "Uses number 1",
+            "use2": "Uses number 2",
+            "use3": "Uses number 3"
+        }
+    },
+    {
+        "name": "Titepati",
+        "info": "This is the info for the aloevera Plant",
+        "uses":{
+            "use1": "Uses number 1",
+            "use2": "Uses number 2",
+            "use3": "Uses number 3"
+        }
+    }
+]

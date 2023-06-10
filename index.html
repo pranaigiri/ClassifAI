@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>ClassifAI Beta</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+
+    <!-- Android  -->
+    <meta name="theme-color" content="#4379bd" id="androidColorID">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-title" content="Application Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+    <link rel='stylesheet' type='text/css' media='screen' href='test.css'>
+    <link id="style" rel='stylesheet' type='text/css' media='screen' href=''>
+    <link rel='stylesheet' type='text/css' media='screen' href='animation.css'>
+    <link rel="manifest" href="manifest.json" id="manifestID">
+    <link rel='stylesheet' type='text/css' media='print' href='print.css'>
+    <script src='main.js'></script>
+    <style>
+
+        *{
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        #contents{
+            visibility: hidden;
+        }
+        svg.loaderSVG{
+            font-family: system-ui;
+            font-weight:bold;
+            position: absolute; 
+            width: 100%; height: 100%;
+        }
+        svg text {
+            animation: stroke 5s infinite alternate;
+            stroke-width: 1;
+            stroke: #ffffff;
+            font-size: 100px;
+        }
+
+        @keyframes stroke {
+                0%   {
+                    fill: rgba(72,138,20,0); stroke: rgba(246,172,67,1);
+                    stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 2;
+                }
+                50%{fill: rgb(255, 255, 255); stroke: rgba(67,121,189,1);}
+                70%  {stroke: rgba(246,172,67,1); }
+                80%  {stroke: rgba(67,121,189,1); stroke-width: 3; }
+                100% {
+                    fill: rgba(67,121,189,0); stroke: rgba(246,172,67,1); 
+                    stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 0;
+                }
+        }
+
+        #load{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 9999;
+            margin: 0;
+            padding: 0;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="load">
+        <svg viewBox="0 0 1320 300" class="loaderSVG">
+            <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                classifAI
+            </text>
+        </svg>	
+    </div>
+ 
+    <div id="contents">
+
+    <header id="headerID" style="overflow-y: hidden;">
+        <div id="burger-menu">
+            <svg class="start" fill="white" version="1.1" id="burger" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="156 -156 612 612" style="enable-background:new 156 -156 612 612;" xml:space="preserve">
+            <circle cx="463.5" cy="-6" r="84.5"/>
+            <circle cx="292.5" cy="151" r="84.5"/>
+            <circle cx="629.5" cy="151" r="84.5"/>
+            <circle cx="456" cy="324.5" r="84.5"/>
+            </svg>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <h1 style="margin-right: 5px;">classifAI</h1><p class="beta">Beta</p>
+        </div>
+        <div class="" id="modeClick">
+            <img id="dmode" width="25px" onclick="toggleMode(this)" src="icons/dark.svg" title="Change Theme">
+        </div>
+    </header>
+
+
+    <div id="menu" class="menu">
+        <ul class="mlist">
+            <li id="home" class="list active"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.66,10.25l-9-8a1,1,0,0,0-1.32,0l-9,8a1,1,0,0,0-.27,1.11A1,1,0,0,0,3,12H4v9a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V12h1a1,1,0,0,0,.93-.64A1,1,0,0,0,21.66,10.25ZM13,20H11V17a1,1,0,0,1,2,0Zm5,0H15V17a3,3,0,0,0-6,0v3H6V12H18ZM5.63,10,12,4.34,18.37,10Z"/></svg>
+                Home</li>
+            <li id="saved"><svg style="transform: rotate(90deg);" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.59,13l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H3a1,1,0,0,0,0,2ZM12,2A10,10,0,0,0,3,7.55a1,1,0,0,0,1.8.9A8,8,0,1,1,12,20a7.93,7.93,0,0,1-7.16-4.45,1,1,0,0,0-1.8.9A10,10,0,1,0,12,2Z"/></svg>
+                Saved</li>
+            <li id="models"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M7,20H4v-0.1C4,19.4,4.4,19,4.9,19c1.4,0,2.6-0.9,3-2.2c0.4-1.6-0.5-3.3-2.1-3.7c-1.3-0.4-2.7,0.2-3.4,1.4c-0.3,0.5-0.1,1.1,0.4,1.4c0.5,0.3,1.1,0.1,1.4-0.4c0,0,0,0,0,0c0.3-0.5,0.9-0.6,1.4-0.3c0.1,0.1,0.2,0.1,0.2,0.2C6,15.7,6,16,6,16.3c-0.2,0.4-0.6,0.7-1,0.7C3.3,17,2,18.3,2,19.9V21c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1S7.6,20,7,20z M7,9H6V3c0-0.6-0.4-1-1-1S4,2.4,4,3v1H3C2.4,4,2,4.4,2,5s0.4,1,1,1h1v3H3c-0.6,0-1,0.4-1,1s0.4,1,1,1h4c0.6,0,1-0.4,1-1S7.6,9,7,9z M11,6h10c0.6,0,1-0.4,1-1s-0.4-1-1-1H11c-0.6,0-1,0.4-1,1S10.4,6,11,6z M21,20H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,20,21,20z M21,9H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,9,21,9z M21,15H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,15,21,15z"/></svg>
+                Models</li>
+            <li id="eapps"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24"><path d="M21.07,16.83,19,14.71a3.08,3.08,0,0,0-3.4-.57l-.9-.9a7,7,0,1,0-1.41,1.41l.89.89A3,3,0,0,0,14.71,19l2.12,2.12a3,3,0,0,0,4.24,0A3,3,0,0,0,21.07,16.83Zm-8.48-4.24a5,5,0,1,1,0-7.08A5,5,0,0,1,12.59,12.59Zm7.07,7.07a1,1,0,0,1-1.42,0l-2.12-2.12a1,1,0,0,1,0-1.42,1,1,0,0,1,1.42,0l2.12,2.12A1,1,0,0,1,19.66,19.66Z"/></svg>
+                Explore Apps</li>
+        </ul>
+        <ul class="menuF">
+            <li>About</li>
+            <li>Contact Us</li>
+        </ul>
+        <ul class="socials">
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 408.788 408.788" style="enable-background:new 0 0 408.788 408.788;" xml:space="preserve">
+                    <path style="fill:#475993;" d="M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085  h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882  v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955  l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087  c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085  C408.786,24.662,384.124,0,353.701,0z"/>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                </svg>                    
+            </li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 551.034 551.034" style="enable-background:new 0 0 551.034 551.034;" xml:space="preserve">
+                    <g>
+                        
+                            <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="275.517" y1="4.57" x2="275.517" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)">
+                            <stop offset="0" style="stop-color:#E09B3D"/>
+                            <stop offset="0.3" style="stop-color:#C74C4D"/>
+                            <stop offset="0.6" style="stop-color:#C21975"/>
+                            <stop offset="1" style="stop-color:#7024C4"/>
+                        </linearGradient>
+                        <path style="fill:url(#SVGID_1_);" d="M386.878,0H164.156C73.64,0,0,73.64,0,164.156v222.722   c0,90.516,73.64,164.156,164.156,164.156h222.722c90.516,0,164.156-73.64,164.156-164.156V164.156   C551.033,73.64,477.393,0,386.878,0z M495.6,386.878c0,60.045-48.677,108.722-108.722,108.722H164.156   c-60.045,0-108.722-48.677-108.722-108.722V164.156c0-60.046,48.677-108.722,108.722-108.722h222.722   c60.045,0,108.722,48.676,108.722,108.722L495.6,386.878L495.6,386.878z"/>
+                        
+                            <linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="275.517" y1="4.57" x2="275.517" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)">
+                            <stop offset="0" style="stop-color:#E09B3D"/>
+                            <stop offset="0.3" style="stop-color:#C74C4D"/>
+                            <stop offset="0.6" style="stop-color:#C21975"/>
+                            <stop offset="1" style="stop-color:#7024C4"/>
+                        </linearGradient>
+                        <path style="fill:url(#SVGID_2_);" d="M275.517,133C196.933,133,133,196.933,133,275.516s63.933,142.517,142.517,142.517   S418.034,354.1,418.034,275.516S354.101,133,275.517,133z M275.517,362.6c-48.095,0-87.083-38.988-87.083-87.083   s38.989-87.083,87.083-87.083c48.095,0,87.083,38.988,87.083,87.083C362.6,323.611,323.611,362.6,275.517,362.6z"/>
+                        
+                            <linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="418.31" y1="4.57" x2="418.31" y2="549.72" gradientTransform="matrix(1 0 0 -1 0 554)">
+                            <stop offset="0" style="stop-color:#E09B3D"/>
+                            <stop offset="0.3" style="stop-color:#C74C4D"/>
+                            <stop offset="0.6" style="stop-color:#C21975"/>
+                            <stop offset="1" style="stop-color:#7024C4"/>
+                        </linearGradient>
+                        <circle style="fill:url(#SVGID_3_);" cx="418.31" cy="134.07" r="34.15"/>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                </svg>                       
+            </li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 418.135 418.135" style="enable-background:new 0 0 418.135 418.135;" xml:space="preserve">
+                    <g>
+                        <path style="fill:#7AD06D;" d="M198.929,0.242C88.5,5.5,1.356,97.466,1.691,208.02c0.102,33.672,8.231,65.454,22.571,93.536   L2.245,408.429c-1.191,5.781,4.023,10.843,9.766,9.483l104.723-24.811c26.905,13.402,57.125,21.143,89.108,21.631   c112.869,1.724,206.982-87.897,210.5-200.724C420.113,93.065,320.295-5.538,198.929,0.242z M323.886,322.197   c-30.669,30.669-71.446,47.559-114.818,47.559c-25.396,0-49.71-5.698-72.269-16.935l-14.584-7.265l-64.206,15.212l13.515-65.607   l-7.185-14.07c-11.711-22.935-17.649-47.736-17.649-73.713c0-43.373,16.89-84.149,47.559-114.819   c30.395-30.395,71.837-47.56,114.822-47.56C252.443,45,293.218,61.89,323.887,92.558c30.669,30.669,47.559,71.445,47.56,114.817   C371.446,250.361,354.281,291.803,323.886,322.197z"/>
+                        <path style="fill:#7AD06D;" d="M309.712,252.351l-40.169-11.534c-5.281-1.516-10.968-0.018-14.816,3.903l-9.823,10.008   c-4.142,4.22-10.427,5.576-15.909,3.358c-19.002-7.69-58.974-43.23-69.182-61.007c-2.945-5.128-2.458-11.539,1.158-16.218   l8.576-11.095c3.36-4.347,4.069-10.185,1.847-15.21l-16.9-38.223c-4.048-9.155-15.747-11.82-23.39-5.356   c-11.211,9.482-24.513,23.891-26.13,39.854c-2.851,28.144,9.219,63.622,54.862,106.222c52.73,49.215,94.956,55.717,122.449,49.057   c15.594-3.777,28.056-18.919,35.921-31.317C323.568,266.34,319.334,255.114,309.712,252.351z"/>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                    <g>
+                    </g>
+                </svg>                       
+            </li>
+        </ul>
+    </div>
+    <div class="savedPreviewContB">
+        <div class="savedPreview">
+            <div class="savedPreviewTitle">Title</div>
+            <div class="closePreview"><img width="30px"s src="./icons/closeBtn.png"></div>
+            <div class="savedPreviewImg"><img src="./images/bI.jpg"></div>
+            <div class="forSavedPreview">
+                <div class="photoOptions ps">
+                    <div class="photoDescTitle detailBtn ps">Info</div>
+                    <div class="photoUsesTitle detailBtn ps active">Benefits</div>
+                    <div class="photoLocationTitle detailBtn ps">Location</div>
+                </div>
+                <div class="photoFeatures">
+                    <div class="photoDescription ps photoInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse non illo repudiandae dicta a? Necessitatibus vel inventore sequi incidunt, alias aliquid nemo nesciunt facilis officia quo iusto reiciendis! Minus, mollitia?</div>
+                    <div class="photoDescription ps photoUses active">
+                        <div class="uses">● Use One</div>
+                        <div class="uses">● Use Two</div>
+                        <div class="uses">● Use Three</div>
+                        <div class="uses">● Use Four</div>
+                        <div class="uses">● Use Five</div>
+                    </div>
+                    <div class="photoDescription ps photoLocation">LocationOne, LocationTwo, LocationThree</div>
+                </div>
+            </div>
+
+            <div class="shareBtnB">
+                <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,14a4,4,0,0,0-3.08,1.48l-5.1-2.35a3.64,3.64,0,0,0,0-2.26l5.1-2.35A4,4,0,1,0,14,6a4.17,4.17,0,0,0,.07.71L8.79,9.14a4,4,0,1,0,0,5.72l5.28,2.43A4.17,4.17,0,0,0,14,18a4,4,0,1,0,4-4ZM18,4a2,2,0,1,1-2,2A2,2,0,0,1,18,4ZM6,14a2,2,0,1,1,2-2A2,2,0,0,1,6,14Zm12,6a2,2,0,1,1,2-2A2,2,0,0,1,18,20Z"/></svg>
+                    Share</label>
+            </div>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="homeTab tabactive"><svg width="35px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.66,10.25l-9-8a1,1,0,0,0-1.32,0l-9,8a1,1,0,0,0-.27,1.11A1,1,0,0,0,3,12H4v9a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V12h1a1,1,0,0,0,.93-.64A1,1,0,0,0,21.66,10.25ZM13,20H11V17a1,1,0,0,1,2,0Zm5,0H15V17a3,3,0,0,0-6,0v3H6V12H18ZM5.63,10,12,4.34,18.37,10Z"></path></svg></div>
+        <div class="modelTab"><svg width="35px" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24"><path d="M7,20H4v-0.1C4,19.4,4.4,19,4.9,19c1.4,0,2.6-0.9,3-2.2c0.4-1.6-0.5-3.3-2.1-3.7c-1.3-0.4-2.7,0.2-3.4,1.4c-0.3,0.5-0.1,1.1,0.4,1.4c0.5,0.3,1.1,0.1,1.4-0.4c0,0,0,0,0,0c0.3-0.5,0.9-0.6,1.4-0.3c0.1,0.1,0.2,0.1,0.2,0.2C6,15.7,6,16,6,16.3c-0.2,0.4-0.6,0.7-1,0.7C3.3,17,2,18.3,2,19.9V21c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1S7.6,20,7,20z M7,9H6V3c0-0.6-0.4-1-1-1S4,2.4,4,3v1H3C2.4,4,2,4.4,2,5s0.4,1,1,1h1v3H3c-0.6,0-1,0.4-1,1s0.4,1,1,1h4c0.6,0,1-0.4,1-1S7.6,9,7,9z M11,6h10c0.6,0,1-0.4,1-1s-0.4-1-1-1H11c-0.6,0-1,0.4-1,1S10.4,6,11,6z M21,20H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,20,21,20z M21,9H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,9,21,9z M21,15H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h10c0.6,0,1-0.4,1-1S21.6,15,21,15z"></path></svg></div>
+        <div class="cameraTab"><img src="./icons/cameraTab.png" width="40px"></div>
+        <div class="savedTab"><svg width="35px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2H8A3,3,0,0,0,5,5V21a1,1,0,0,0,.5.87,1,1,0,0,0,1,0L12,18.69l5.5,3.18A1,1,0,0,0,18,22a1,1,0,0,0,.5-.13A1,1,0,0,0,19,21V5A3,3,0,0,0,16,2Zm1,17.27-4.5-2.6a1,1,0,0,0-1,0L7,19.27V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z"/></svg>        </div>
+        <div class="exploreTab"><svg width="35px" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24"><path d="M21.07,16.83,19,14.71a3.08,3.08,0,0,0-3.4-.57l-.9-.9a7,7,0,1,0-1.41,1.41l.89.89A3,3,0,0,0,14.71,19l2.12,2.12a3,3,0,0,0,4.24,0A3,3,0,0,0,21.07,16.83Zm-8.48-4.24a5,5,0,1,1,0-7.08A5,5,0,0,1,12.59,12.59Zm7.07,7.07a1,1,0,0,1-1.42,0l-2.12-2.12a1,1,0,0,1,0-1.42,1,1,0,0,1,1.42,0l2.12,2.12A1,1,0,0,1,19.66,19.66Z"></path></svg></div>
+    </div>
+
+    <div class="errorModal">
+        <div class="errorCloseBtn">X</div>
+        <div class="errorTitle">Error Title</div>
+        <div class="errorDesc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, dicta.</div>
+    </div>
+
+    <div class="showLoader">
+        <div class="showLoaderIcon">
+            <svg viewBox="0 0 1320 300" class="loaderSVG">
+                <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+                    classifAI
+                </text>
+            </svg>	
+        </div>
+    </div>
+    
+    <section id="container" class="sectionClass running">
+
+        <div class="category i">
+            <div class="modelInfo">Herbal_Plants</div>
+            <div class="flag">
+            </div>
+            <h1 class="imageH">Image Classify</h1>
+            <div class="plantDesc">
+                <div id="captureIcon">
+                    <svg xmlns="http:/2/www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20Zm4-9H13V8a1,1,0,0,0-2,0v3H8a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V13h3a1,1,0,0,0,0-2Z"/></svg>
+                    <p class="steps">Capture</p>
+                </div>
+                <div id="analyzeIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.87,8.6A1,1,0,0,0,19,8H14.42l1.27-4.74a1,1,0,0,0-.17-.87A1,1,0,0,0,14.73,2h-7a1,1,0,0,0-1,.74l-2.68,10a1,1,0,0,0,.17.87,1,1,0,0,0,.8.39H8.89L7.08,20.74a1,1,0,0,0,1.71.93l10.9-12A1,1,0,0,0,19.87,8.6Zm-9.79,8.68,1.07-4a1,1,0,0,0-.17-.87,1,1,0,0,0-.79-.39H6.35L8.49,4h4.93L12.15,8.74a1,1,0,0,0,1,1.26h3.57Z"/></svg>
+                    <p class="steps">Analyze</p>
+                </div>
+                <div id="saveIcon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2H8A3,3,0,0,0,5,5V21a1,1,0,0,0,.5.87,1,1,0,0,0,1,0L12,18.69l5.5,3.18A1,1,0,0,0,18,22a1,1,0,0,0,.5-.13A1,1,0,0,0,19,21V5A3,3,0,0,0,16,2Zm1,17.27-4.5-2.6a1,1,0,0,0-1,0L7,19.27V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z"/></svg>
+                    <p class="steps">Save</p>
+                </div>
+            </div>
+            <div class="goBtn ic">
+                <a id="pclick">></a>
+            </div>
+
+            <div class="captureS">
+                <div class="capture-list">
+                    <img src="icons/camera.png" id="cameraBtn">
+                    <h3>Camera</h3>
+                </div>
+                <div class="capture-list" onclick="triggerInput()">
+                    <img src="icons/upload.png">
+                    <h3>Upload</h3>
+                    <input type="file" id="fileID" accept="image/*" name="image" hidden>
+                    <img id="imgID" style="display: none;">
+                </div>
+            </div>
+
+
+            <div class="line"></div>
+        </div>
+        
+        <div class="category a">
+            <p class="cs">Coming Soon</p>
+            <h1 class="audioH">Audio Classify</h1>
+            <div class="audioDesc">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,15a4,4,0,0,0,4-4V5A4,4,0,0,0,8,5v6A4,4,0,0,0,12,15ZM10,5a2,2,0,0,1,4,0v6a2,2,0,0,1-4,0Zm10,6a1,1,0,0,0-2,0A6,6,0,0,1,6,11a1,1,0,0,0-2,0,8,8,0,0,0,7,7.93V21H9a1,1,0,0,0,0,2h6a1,1,0,0,0,0-2H13V18.93A8,8,0,0,0,20,11Z"/></svg>                    
+                    <p class="steps">Record</p>
+                </div>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.87,8.6A1,1,0,0,0,19,8H14.42l1.27-4.74a1,1,0,0,0-.17-.87A1,1,0,0,0,14.73,2h-7a1,1,0,0,0-1,.74l-2.68,10a1,1,0,0,0,.17.87,1,1,0,0,0,.8.39H8.89L7.08,20.74a1,1,0,0,0,1.71.93l10.9-12A1,1,0,0,0,19.87,8.6Zm-9.79,8.68,1.07-4a1,1,0,0,0-.17-.87,1,1,0,0,0-.79-.39H6.35L8.49,4h4.93L12.15,8.74a1,1,0,0,0,1,1.26h3.57Z"/></svg>
+                    <p class="steps">Analyze</p>
+                </div>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2H8A3,3,0,0,0,5,5V21a1,1,0,0,0,.5.87,1,1,0,0,0,1,0L12,18.69l5.5,3.18A1,1,0,0,0,18,22a1,1,0,0,0,.5-.13A1,1,0,0,0,19,21V5A3,3,0,0,0,16,2Zm1,17.27-4.5-2.6a1,1,0,0,0-1,0L7,19.27V5A1,1,0,0,1,8,4h8a1,1,0,0,1,1,1Z"/></svg>
+                    <p class="steps">Save</p>
+                </div>
+            </div>
+            <div class="goBtn ac">
+                <a href="#">></a>
+            </div>
+            <div class="line2"></div>
+        </div>
+
+
+    </section>
+
+    <section id="savedSection" class="sectionClass stopped">
+        <h1 class="sectionTitle">Your <b>Saved</b> Items!</h1>
+        <hr>
+        
+        <div class="savedHead">
+            <div class="savedCount">
+                <p><b class="savedNumber">0</b></p>
+                <p>Items Saved.</p>
+            </div>
+        </div>
+        <div class="savedContents">
+        </div>
+
+    </section>
+
+        <div class="deleteConfirmModal">
+            <div class="deleteConfirm title">Remove <label class="deleteItemName">Item</label> ?</div>
+            <div class="deleteConfirmCont">
+                <button class="deleteConfirm yes">Yes</button>
+                <button class=" deleteConfirm no">No</button>
+            </div>
+        </div>
+
+
+
+    
+    <section id="modelsSection" class="sectionClass stopped">
+        <h1 class="sectionTitle">Downloaded <b>Models</b>!</h1>
+        <hr>
+
+        <div class="model-container">
+            <div class="model-inner-container">
+                <p class="model-name">Herbal Plants</p>
+                <label class="switchBG" id="Herbal_Plants">
+                    <span class="switchRound"></span>
+                </label>
+            </div>
+            <div class="model-inner-container">
+                <p class="model-name">
+                    <svg
+                    style="width:13px"
+                    id="svg3019"
+                    sodipodi:docname="New document 2"
+                    viewBox="0 0 194.22 184.73"
+                    version="1.1"
+                    inkscape:version="0.48.0 r9654"
+                  >
+                  <g
+                      id="layer1"
+                      inkscape:label="Layer 1"
+                      inkscape:groupmode="layer"
+                      transform="translate(-262.89 -462.86)"
+                    >
+                    <g
+                        id="g3867"
+                        transform="translate(10.175 71.896)"
+                      >
+                      <path
+                          id="path2985"
+                          sodipodi:r2="23.082041"
+                          style="fill:#ffcc00"
+                          sodipodi:type="star"
+                          d="m369.21 535.67-27.378-13.792-26.883 14.735 4.6566-30.3-22.321-21.014 30.256-4.9346 13.088-27.722 14.043 27.251 30.409 3.8806-21.577 21.776z"
+                          sodipodi:r1="46.164082"
+                          inkscape:transform-center-x="-0.0063051932"
+                          inkscape:transform-center-y="-9.7444528"
+                          transform="matrix(2.2115 .038861 -.038861 2.2115 -385.88 -623.3)"
+                          sodipodi:arg2="1.5534256"
+                          sodipodi:arg1="0.92510704"
+                          inkscape:randomized="0"
+                          sodipodi:cy="498.79858"
+                          sodipodi:cx="341.43155"
+                          inkscape:rounded="0"
+                          inkscape:flatsided="false"
+                          sodipodi:sides="5"
+                      />
+                      <path
+                          id="path3836"
+                          sodipodi:nodetypes="cccc"
+                          d="m380.03 451.38c-30.39 41.369-30.72 41.819-30.72 41.819l97.411-31.899z"
+                          inkscape:transform-center-x="-48.70566"
+                          inkscape:transform-center-y="-20.909293"
+                          inkscape:connector-curvature="0"
+                          style="fill:#ffe680"
+                      />
+                      <path
+                          id="path3838"
+                          d="m349.81 492.31v51.942l-60.63 31.117z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3840"
+                          d="m349.81 492.31 59.613 81.476-11.189-65.984z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3842"
+                          d="m253.1 461.37 96.715 30.942-29.882-40.842z"
+                          style="fill:#ffe680"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3844"
+                          d="m349.81 492.31v-101.22l29.83 60.357z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3846"
+                          d="m289.8 574.53 11.261-66.541 48.757-15.679z"
+                          style="fill:#ffd42a"
+                          inkscape:connector-curvature="0"
+                      />
+                    </g>
+                  </g>
+                
+                                    </svg>
+                    Plant Diseases 
+                </p>
+                <label class="premiumBtn" id="Plant_Diseases" onclick="showError('Pending!', 'This model needs to be trained!')">
+                    <p>Get</p>
+                </label>
+            </div>
+            <div class="model-inner-container">
+
+                <p class="model-name">
+                    <svg
+                    style="width:13px"
+                    id="svg3019"
+                    sodipodi:docname="New document 2"
+                    viewBox="0 0 194.22 184.73"
+                    version="1.1"
+                    inkscape:version="0.48.0 r9654"
+                  >
+                  <g
+                      id="layer1"
+                      inkscape:label="Layer 1"
+                      inkscape:groupmode="layer"
+                      transform="translate(-262.89 -462.86)"
+                    >
+                    <g
+                        id="g3867"
+                        transform="translate(10.175 71.896)"
+                      >
+                      <path
+                          id="path2985"
+                          sodipodi:r2="23.082041"
+                          style="fill:#ffcc00"
+                          sodipodi:type="star"
+                          d="m369.21 535.67-27.378-13.792-26.883 14.735 4.6566-30.3-22.321-21.014 30.256-4.9346 13.088-27.722 14.043 27.251 30.409 3.8806-21.577 21.776z"
+                          sodipodi:r1="46.164082"
+                          inkscape:transform-center-x="-0.0063051932"
+                          inkscape:transform-center-y="-9.7444528"
+                          transform="matrix(2.2115 .038861 -.038861 2.2115 -385.88 -623.3)"
+                          sodipodi:arg2="1.5534256"
+                          sodipodi:arg1="0.92510704"
+                          inkscape:randomized="0"
+                          sodipodi:cy="498.79858"
+                          sodipodi:cx="341.43155"
+                          inkscape:rounded="0"
+                          inkscape:flatsided="false"
+                          sodipodi:sides="5"
+                      />
+                      <path
+                          id="path3836"
+                          sodipodi:nodetypes="cccc"
+                          d="m380.03 451.38c-30.39 41.369-30.72 41.819-30.72 41.819l97.411-31.899z"
+                          inkscape:transform-center-x="-48.70566"
+                          inkscape:transform-center-y="-20.909293"
+                          inkscape:connector-curvature="0"
+                          style="fill:#ffe680"
+                      />
+                      <path
+                          id="path3838"
+                          d="m349.81 492.31v51.942l-60.63 31.117z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3840"
+                          d="m349.81 492.31 59.613 81.476-11.189-65.984z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3842"
+                          d="m253.1 461.37 96.715 30.942-29.882-40.842z"
+                          style="fill:#ffe680"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3844"
+                          d="m349.81 492.31v-101.22l29.83 60.357z"
+                          style="fill:#ffdd55"
+                          inkscape:connector-curvature="0"
+                      />
+                      <path
+                          id="path3846"
+                          d="m289.8 574.53 11.261-66.541 48.757-15.679z"
+                          style="fill:#ffd42a"
+                          inkscape:connector-curvature="0"
+                      />
+                    </g>
+                  </g>
+                
+                                    </svg>
+                    Skin Diseases</p>
+                <label class="premiumBtn" id="Skin_Diseases"onclick="showError('Pending!', 'This model needs to be trained!')">
+                    <p>Get</p>
+                </label>
+            </div>
+            <div class="model-inner-container">
+                <p class="model-name">Fruit's Nutrition</p>
+                <label class="switchBG" id="Fruits_Nutrition">
+                    <span class="switchRound"></span>
+                </label>
+            </div>
+
+            <p class="models-warning">These are Experimental Models and provides accuracy upto 95% based on the given input. We recommend using a picture with clean background and maximum focus on the subject.</p>
+
+
+        </div>
+
+        
+    </section>
+
+    <section id="eappsSection" class="sectionClass stopped">
+        <h1 class="sectionTitle">Explore More <b>Apps</b>!</h1>
+        <hr>
+        
+    </section>
+
+    <div class="captureAnalysing">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.87,8.6A1,1,0,0,0,19,8H14.42l1.27-4.74a1,1,0,0,0-.17-.87A1,1,0,0,0,14.73,2h-7a1,1,0,0,0-1,.74l-2.68,10a1,1,0,0,0,.17.87,1,1,0,0,0,.8.39H8.89L7.08,20.74a1,1,0,0,0,1.71.93l10.9-12A1,1,0,0,0,19.87,8.6Zm-9.79,8.68,1.07-4a1,1,0,0,0-.17-.87,1,1,0,0,0-.79-.39H6.35L8.49,4h4.93L12.15,8.74a1,1,0,0,0,1,1.26h3.57Z"/></svg>
+    </div> 
+    <section id="cameraSection" class="sectionClass stopped">
+
+        <div class="screen">
+
+            <div class="feedback">
+                <div class="info">Not Ready!</div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="selected-model-viewer">
+                <div class="smv-heading">ClassifAI</div>
+                <div class="smv-title">Not Selected</div>
+                <div class="smv-options">
+                    <img src="./icons/down-arrow.png" class="smv-options-img"  onclick="showOptions()">
+                </div>
+                <div class="smv-model-lists">
+                    <label class="smv-model-list" onclick="updateModel(this)" id="Herbal_PlantsLabel">Herbal_Plants</label>
+                    <label class="smv-model-list" onclick="updateModel(this)" id="Fruits_NutritionLabel">Fruits_Nutrition</label>
+                </div>
+            </div>
+
+            <div class="back-btn" id="back-btn-id">
+                <img src="./icons/back-btn.png">
+            </div>
+
+
+            <video id="player" class="camera-window" autoplay>
+            </video>
+
+            <canvas id="myCanvas" style="border:1px solid #d3d3d3; display: none;" width="auto" height="auto"></canvas>
+        
+
+
+        </div>
+
+    </section>
+
+    <div class="bottom-controls" id="bottom-controls-id">
+        <div class="bottom-controls border" id="capture-bg-border">
+            <div class="flash-btn"><img src="./icons/flash-on.png" id="flash-id"></div>
+            <div class="capture-btn disable">
+                <svg height="50" width="50" class="svg-circle" id="svg-btn-id">
+
+                    <circle cx="25" cy="25" r="25" fill="lightblue" />
+                    <circle cx="25" cy="25" r="20" stroke="white" stroke-width="4" fill="lightblue" />
+            
+                </svg> 
+            </div>
+            <div class="switch-btn"><img src="./icons/switch-camera4.png" id="switch" title="Switch Camera"></div>
+        </div>
+    </div>
+
+    <div class="preResult">
+        <label class="presResultQuestion">Here's your result<p style="font-size: .8rem;color: gray;">most likely the closest looking one <br> or the highest scored one.</p></label>
+        <div class="possibleImages">
+            <div class="threePR">
+                <div class="threeScore">70%</div>
+            <div class="threeDiv">
+                <div class="three ImgCont">
+                    <img src="./images/Herbal_Plants/Brahmi.jpg" class="possible three">
+                    <p>Name</p>
+                </div>
+            </div>                
+            </div>
+            <div class="onePR">
+                <div class="oneScore">90%</div>
+                <div class="oneDiv">
+                    <div class="one ImgCont">
+                        <img src="./images/Herbal_Plants/Aloevera.jpg" class="possible one">
+                        <p>Name</p>
+                    </div>
+                </div>                
+            </div>
+            <div class="twoPR">
+                <div class="twoScore">80%</div>
+                <div class="twoDiv">
+                    <div class="two ImgCont">
+                        <img src="./images/Herbal_Plants/Banmara.jpg" class="possible two">
+                        <p>Name</p>
+                    </div>
+                </div>                
+            </div>
+
+        </div>
+        <div class="possibleAction">
+            <label>or Retry?</label>
+            <button onclick="hidePreResult()">Exit</button>
+        </div>
+    </div>
+
+    
+    <div class="avgCount" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); background-color: rgba(0,0,0,0.3); font-size: 1.5rem; color: white; text-align: center;" hidden="true">
+        
+    </div>
+
+    <div class="predictionWrapper hidden">
+        <div class="resultCloseBtn"><img src="./icons/closeBtn.png"></div>
+        
+        <div class="predictionContainer">
+            <div class="titleContainer">Title Name</div>
+            <div class="subtitleContainer">Lorem Ipsum</div>
+            <div class="photoContainer"><img src="./images/df.jpg" alt="" class="predictedPhoto"></div>
+    
+            <div class="forPlants">
+                <div class="photoOptions hp">
+                    <div class="photoDescTitle detailBtn hp">Info</div>
+                    <div class="photoUsesTitle detailBtn hp active">Uses</div>
+                    <div class="photoLocationTitle detailBtn hp">Location</div>
+                </div>
+                <div class="photoFeatures">
+                    <div class="photoDescription hp photoInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse non illo repudiandae dicta a? Necessitatibus vel inventore sequi incidunt, alias aliquid nemo nesciunt facilis officia quo iusto reiciendis! Minus, mollitia?</div>
+                    <div class="photoDescription hp photoUses active">
+                        <div class="uses">● Use One</div>
+                        <div class="uses">● Use Two</div>
+                        <div class="uses">● Use Three</div>
+                        <div class="uses">● Use Four</div>
+                        <div class="uses">● Use Five</div>
+                    </div>
+                    <div class="photoDescription hp photoLocation">LocationOne, LocationTwo, LocationThree</div>
+                </div>
+            </div>
+            <div class="forFruits">
+                <div class="photoOptions fn">
+                    <div class="photoDescTitle detailBtn fn">Info</div>
+                    <div class="photoUsesTitle detailBtn fn active">Nutrition Facts</div>
+                    <div class="photoLocationTitle detailBtn fn">Location</div>
+                </div>
+                <div class="photoFeatures">
+                    <div class="photoDescription fn photoInfo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse non illo repudiandae dicta a? Necessitatibus vel inventore sequi incidunt, alias aliquid nemo nesciunt facilis officia quo iusto reiciendis! Minus, mollitia?</div>
+                    <div class="photoDescription fn photoUses active">
+                        <div class="uses">● Use One</div>
+                        <div class="uses">● Use Two</div>
+                        <div class="uses">● Use Three</div>
+                        <div class="uses">● Use Four</div>
+                        <div class="uses">● Use Five</div>
+                    </div>
+                    <div class="photoDescription fn photoLocation">LocationOne, LocationTwo, LocationThree</div>
+                </div>
+            </div>
+            <div class="saveBtn">
+                <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,14a4,4,0,0,0-3.08,1.48l-5.1-2.35a3.64,3.64,0,0,0,0-2.26l5.1-2.35A4,4,0,1,0,14,6a4.17,4.17,0,0,0,.07.71L8.79,9.14a4,4,0,1,0,0,5.72l5.28,2.43A4.17,4.17,0,0,0,14,18a4,4,0,1,0,4-4ZM18,4a2,2,0,1,1-2,2A2,2,0,0,1,18,4ZM6,14a2,2,0,1,1,2-2A2,2,0,0,1,6,14Zm12,6a2,2,0,1,1,2-2A2,2,0,0,1,18,20Z"/></svg>
+                    Share</label>
+                <label class="save" onclick="saveItem()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,2H6A1,1,0,0,0,5,3V21a1,1,0,0,0,1.65.76L12,17.27l5.29,4.44A1,1,0,0,0,18,22a.84.84,0,0,0,.38-.08A1,1,0,0,0,19,21V3A1,1,0,0,0,18,2ZM17,18.86,12.64,15.2a1,1,0,0,0-1.28,0L7,18.86V4H17Z"/></svg>
+                    <p class="pSaveBtn">Save</p></label>
+            </div>
+    
+            <div class="similarPrediction">
+                <label class="similarTitle">SIMILAR</label>
+                <div class="similarItems">
+                    <div class="similarItem">Item A</div>
+                    <div class="similarItem">Item B</div>
+                    <div class="similarItem">Item C</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script>
+        document.onreadystatechange = function () {
+        var state = document.readyState
+        if (state == 'complete') {
+                document.getElementById('interactive');
+                document.getElementById('contents').style.visibility = "visible";
+                document.getElementById('load').style.opacity="0";
+                setTimeout(() => {
+                    document.getElementById('load').style.visibility="hidden";
+                }, 1000);
+        }
+        }
+
+
+</script>
+
+<script src="script.js"></script>
+<script src="tf.min.js" crossorigin="anonymous"></script>
+<script src="teachablemachine-image.min.js" crossorigin="anonymous"></script>
+<script src="predict.js"></script>
+<script src="test.js"></script>
+<script src="model-list.js"></script>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyAKeLGsFcHk9TOdx67aiXUDO0zDB_3Mu2A",
+      authDomain: "classifai-43671.firebaseapp.com",
+      projectId: "classifai-43671",
+      storageBucket: "classifai-43671.appspot.com",
+      messagingSenderId: "1029167424212",
+      appId: "1:1029167424212:web:73648e3bc2b36b9f54d141",
+      measurementId: "G-LFKLPG6NJL"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+</html>
+

@@ -1,0 +1,116 @@
+[ 
+    {
+        "name": "Aloevera",
+        "info": " Asphodelaceae, Aloe vera is a succulent plant species of the genus Aloe. Having some 500 species, Aloe is widely distributed, and is considered an invasive species in many world regions. ",
+        "uses":[
+            {
+                "use": "Soothes Burns"
+            },
+            {
+                "use": "Heals Wounds"
+            },
+            {
+                "use": "Eases Intestinal Problems"
+            },
+            {
+                "use": "Reduces Arthritic Swelling"
+            },
+            {
+                "use": "Heals Psoriasis Lesions"
+            },
+            {
+                "use": "Gum Infections"
+            }
+        ],
+        "location":"Found in almost all region worldwide."
+    },
+    {
+        "name": "Banmara",
+        "info": "Adenophorium Spreng, locally called 'Banmara' or 'Kalijhar', is one of the widely distributed plants in many countries with more then 150 species. Local people use this plant as natural fertilizer. In addition to this, leaf juice is applied for the treatment of cuts and wounds, and root juice is used for the treatment of fever.",
+        "uses":[
+
+            {
+                "use": "Blood Clots"
+            },
+            {
+                "use": "Skin Lesions"
+            },
+            {
+                "use": "High Blood Pressure"
+            },
+            {
+                "use": "Gastric"
+            },
+            {
+                "use": "Ulcer"
+            },
+            {
+                "use": "AIDS"
+            }
+        ],
+        "location": "Worldwide(middle hill)"
+    },
+    {
+        "name": "Brahmi",
+        "info": "Bacopa monnieri, is an edible herb, and while its native to India, it has since spread to tropical regions all over the world.Brahmi has soft, hairy stems and bright green, oval, succulent leaves.Its flowers are small and white with yellow centers.It is completely edible and is very popular as a medicine when it is steeped into a tea, mixed with oil, or worked into a paste.",
+        "uses":[
+            {
+                "use": "Anxiety"
+            },
+            {
+                "use": "Alzheimer's disease"
+            },
+            {
+                "use": "Improves Memory"
+            },
+            {
+                "use": "Irritable Bowel Syndrome"
+            }
+        ],
+        "location": "Worldwide(middle hill)"
+    },
+    {
+        "name": "Tulsi",
+        "info": "Ocimum Sanctum Linn, is rich in Vitamin C and zinc. It thus acts as a natural immunity booster and keeps infections at bay. It has immense anti-bacterial, anti-viral and anti-fungal properties which protect us from a variety of infections.",
+        "uses":[
+            {
+                "use": "Cure Throat Infections"
+            },
+            {
+                "use": "Improves Respiratory System"
+            },
+            {
+                "use": "Cure Nasal Lesions"
+            },
+            {
+                "use": "Cure Earache"
+            },
+            {
+                "use": "Cure Skin Diseases"
+            }
+        ],
+        "location": "Found in almost all region."
+    },
+    {
+        "name": "Titepati",
+        "info": "Artemison vulgaris, It is a very common plant growing on nitrogenous soils, such as waste places,roadsides and other weedy and uncultivated areas.In many ruler areasis used as an offeringto the gods, for cleansing the environment (by sweeping floors or hanging a bundle outsidethe home), as incense, and also as a medicinal plant.",
+        "uses":[
+            {
+                "use": "Malaria"
+            },
+            {
+                "use": "Cough"
+            },
+            {
+                "use": "Blood Clots"
+            },
+            {
+                "use": "Diabetes"
+            },
+            {
+                "use": "Digestive Problems"
+            }
+        ],
+        "location": "Worldwide(middle hills)"
+    }
+]

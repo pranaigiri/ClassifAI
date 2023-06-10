@@ -1,0 +1,57 @@
+{
+    "id":"/",
+    "name": "ClassifAI Beta",
+    "short_name": "ClassifAI",
+    "icons":[
+        {
+            "src":"icons/icon/icon72.png",
+            "sizes":"72x72",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon96.png",
+            "sizes":"96x96",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon128.png",
+            "sizes":"128x128",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon144.png",
+            "sizes":"144x144",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon192.png",
+            "sizes":"192x192",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon384.png",
+            "sizes":"384x384",
+            "types":"image/png"
+        },
+        {
+            "src":"icons/icon/icon512.png",
+            "sizes":"512x512",
+            "types":"image/png"
+        }
+    ],
+    "gcm_sender_id": "",
+    "gcm_user_visible_only": true,
+    "start_url": "/",
+    "permissions": [
+      "gcm"
+    ],
+    "scope": "/",
+    "orientation": "portrait",
+    "display": "standalone",
+    "theme_color": "white",
+    "background_color": "white"
+}
+
+
+
+
