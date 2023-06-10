@@ -1,2 +1,11 @@
 # ClassifAI
-This project consists of tool for classifying image with multi-model selection built using pure HTML, CSS &amp; JS.
+
+This tool is built for classifying images with multi-model selection which consists of two pre-trained models:
+ - Common Herbal Plants found in Sikkim
+ - Fruits Nutrition
+
+It can also be used to classify images with your own custom trained models.
+
+This project was developed for my Major Project in SRM University Sikkim during the VI Semester of my BSc.IT Course.
+
+ - - Have fun trying this tool! - -
