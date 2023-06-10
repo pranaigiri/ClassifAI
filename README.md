@@ -8,4 +8,4 @@ It can also be used to classify images with your own custom trained models.
 
 This project was developed for my Major Project in SRM University Sikkim during the VI Semester of my BSc.IT Course.
 
- - - Have fun trying this tool! - -
+Have fun trying!
